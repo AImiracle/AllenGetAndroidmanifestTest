@@ -16,6 +16,7 @@ public class CommonUtil {
     }
 
     public void check(){
+        //测试
         try {
             PackageManager packageManager = context.getPackageManager();
             PackageInfo packageInfo = packageManager.getPackageInfo(
