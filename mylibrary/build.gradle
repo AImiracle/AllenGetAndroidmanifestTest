@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'com.aaron.gradle.bintray-release'
 android {
     compileSdkVersion 28
 
@@ -17,7 +17,8 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -26,7 +27,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation ('com.android.support:appcompat-v7:+')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
@@ -37,9 +38,22 @@ publish {
     userOrg = 'aimiracle'//bintray.com你的用户名
     groupId = 'com.mintegral.allen'//jcenter上的路径
     artifactId = 'checkTool'//项目名称
-    publishVersion = '1.0.0'//版本号
+    archivesPath = './build/outputs'
+    archivesName = 'AllenCheckTool'
+    publishVersion = '1.1.0'//版本号
     desc = 'CheckTool of Mintegral SDK Intergration'//描述，不重要
     website = 'https://bintray.com/aimiracle/Allen'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
 }
+
+task makeJar(type: proguard.gradle.ProGuardTask, dependsOn: "build") {
+    // 未混淆的jar路径
+    injars 'build/intermediates/intermediate-jars/release/classes.jar'
+    // 混淆后的jar输出路径
+    outjars 'build/outputs/AllenCheckTool.jar'
+    // 混淆协议
+    configuration 'proguard-rules.pro'
+}
+
+
 
 
