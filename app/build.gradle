@@ -1,0 +1,57 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion '28.0.0'
+    defaultConfig {
+        applicationId "com.example.liufeng.allengetandroidmanifesttest"
+        minSdkVersion 22
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+repositories{
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile(name: 'mintegral_alphab', ext: 'aar')
+    compile(name: 'mintegral_appwall', ext: 'aar')
+    compile(name: 'mintegral_appwallext', ext: 'aar')
+    compile(name: 'mintegral_common', ext: 'aar')
+    compile(name: 'mintegral_interstitial', ext: 'aar')
+    compile(name: 'mintegral_interstitialvideo', ext: 'aar')
+    compile(name: 'mintegral_mtgdownloads', ext: 'aar')
+    compile(name: 'mintegral_mtgjscommon', ext: 'aar')
+//    compile(name: 'mintegral_mtgnative', ext: 'aar')
+    compile(name: 'mintegral_nativeex', ext: 'aar')
+    compile(name: 'mintegral_offerwall', ext: 'aar')
+    compile(name: 'mintegral_playercommon', ext: 'aar')
+    compile(name: 'mintegral_reward', ext: 'aar')
+    compile(name: 'mintegral_videocommon', ext: 'aar')
+    compile(name: 'mintegral_videofeeds', ext: 'aar')
+    compile(name: 'mintegral_videojs', ext: 'aar')
+    compile(name: 'mintegral_interactiveads', ext: 'aar')
+    //noinspection GradleCompatible
+    compile 'com.android.support:support-v4:28.0.0'
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    // this way you only enable BlockCanary in debug package
+    debugCompile 'com.github.markzhai:blockcanary-android:1.5.0'
+//    compile 'com.mintegral.allen:checkTool:1.1.0'
+//    compile(name: 'AllenCheckTool', ext: 'jar')
+
+    implementation project(':mylibrary')
+}
